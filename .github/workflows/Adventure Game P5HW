@@ -19,7 +19,7 @@ def use_potion(player, potion_used):
     if potion_used:
         print("🧪 You've already used your healing potion!")
         return potion_used
- heal_amount = 8
+    heal_amount = 8
     healed = min(heal_amount, 20 - player["hp"])
     player["hp"] += healed
     print(f"🧪 You use a healing potion and recover {healed} HP!")
@@ -39,7 +39,8 @@ def battle(player, monster, potion_used):
         if choice == "2":
             potion_used = use_potion(player, potion_used)
             continue  # Skip attack turn after healing
-player_roll = roll_dice(6)
+
+        player_roll = roll_dice(6)
         monster_roll = roll_dice(monster["attack_die"])
 
         print(f"\nYou roll: {player_roll} 🎲 | {monster['name']} rolls: {monster_roll} 🎲")
@@ -60,7 +61,7 @@ player_roll = roll_dice(6)
 
     if player["hp"] > 0:
         print(f"💀 You defeated the {monster['name']}!")
-else:
+    else:
         print(f"☠️ You were slain by the {monster['name']}... Game Over.")
         return False, potion_used
 
@@ -81,7 +82,7 @@ def main():
             break
         else:
             print("🏆 Get ready for the next fight...")
- time.sleep(1.5)
+            time.sleep(1.5)
 
     if player["hp"] > 0:
         print("\n🎉 You have survived the gauntlet and won eternal glory!")
