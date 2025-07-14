@@ -1,0 +1,92 @@
+import random
+import time
+
+# 🎲 Roll a die
+def roll_dice(sides=6):
+    return random.randint(1, sides)
+
+# 🐉 Create a monster dictionary
+def create_monster():
+    monster_pool = [
+        {"name": "Goblin", "hp": 8, "attack_die": 4, "emoji": "💚"},
+        {"name": "Orc", "hp": 12, "attack_die": 6, "emoji": "🪓"},
+        {"name": "Troll", "hp": 15, "attack_die": 8, "emoji": "🌲"},
+    ]
+    return random.choice(monster_pool)
+
+# 🧪 Heal the player
+def use_potion(player, potion_used):
+    if potion_used:
+        print("🧪 You've already used your healing potion!")
+        return potion_used
+ heal_amount = 8
+    healed = min(heal_amount, 20 - player["hp"])
+    player["hp"] += healed
+    print(f"🧪 You use a healing potion and recover {healed} HP!")
+    print(f"❤️ Your HP is now {player['hp']}")
+    return True
+
+# ⚔️ Battle between player and monster
+def battle(player, monster, potion_used):
+    print(f"\n⚔️ A wild {monster['emoji']} {monster['name']} appears with {monster['hp']} HP!")
+
+    while player["hp"] > 0 and monster["hp"] > 0:
+        print("\n🎯 Choose an action:")
+        print("1. Roll to attack 🎲")
+        print("2. Use healing potion 🧪")
+        choice = input("Enter 1 or 2: ")
+
+        if choice == "2":
+            potion_used = use_potion(player, potion_used)
+            continue  # Skip attack turn after healing
+player_roll = roll_dice(6)
+        monster_roll = roll_dice(monster["attack_die"])
+
+        print(f"\nYou roll: {player_roll} 🎲 | {monster['name']} rolls: {monster_roll} 🎲")
+
+        if player_roll > monster_roll:
+            damage = player_roll - monster_roll
+            monster["hp"] -= damage
+            print(f"💥 You hit {monster['name']} for {damage} damage!")
+        elif monster_roll > player_roll:
+            damage = monster_roll - player_roll
+            player["hp"] -= damage
+            print(f"💥 {monster['name']} hits YOU for {damage} damage!")
+        else:
+            print("🛡️ It's a tie! No damage this round.")
+
+        print(f"❤️ Your HP: {player['hp']} | {monster['emoji']} {monster['name']} HP: {monster['hp']}")
+        time.sleep(1)
+
+    if player["hp"] > 0:
+        print(f"💀 You defeated the {monster['name']}!")
+else:
+        print(f"☠️ You were slain by the {monster['name']}... Game Over.")
+        return False, potion_used
+
+    return True, potion_used
+
+# 🎮 Main game loop
+def main():
+    print("🏰 Welcome to Dungeon Dice Duel! 🎲⚔️")
+    player = {"name": "Hero", "hp": 20}
+    potion_used = False
+
+    # 3 random battles
+    for round_num in range(1, 4):
+        print(f"\n🔥 ROUND {round_num} 🔥")
+        monster = create_monster()
+        survived, potion_used = battle(player, monster, potion_used)
+        if not survived:
+            break
+        else:
+            print("🏆 Get ready for the next fight...")
+ time.sleep(1.5)
+
+    if player["hp"] > 0:
+        print("\n🎉 You have survived the gauntlet and won eternal glory!")
+    else:
+        print("\n💀 Your journey ends in the depths of the dungeon...")
+
+# 🚀 Run the game
+main()
