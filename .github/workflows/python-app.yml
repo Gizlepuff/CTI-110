@@ -41,3 +41,4 @@ def main():
     else:
         print(f"Change is: ${change:.2f}")
         disperse_change(change)
+main()
