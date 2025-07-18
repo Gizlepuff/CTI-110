@@ -1,3 +1,7 @@
+#Jonas Hall
+#7/14/25
+#P5HW
+# It is a turn based gaunlet battle simulator that loops
 import random
 import time
 
