@@ -1,3 +1,7 @@
+#Jonas Hall
+#7/14/25
+#P5LAB
+# To create a self checkout that lets you know how much money you need to buy what you need
 import random
 
 def disperse_change(change):
